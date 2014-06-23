@@ -133,7 +133,8 @@ if __name__ == "__main__":
     hsvs = []
     for palette_colour in p.colors:
         c = ArtColour(*palette_colour.value)
-        print '\x1b[48;5;%dm     \x1b[0m' % (c.ansi)
+        if VERBOSE:
+            print '\x1b[48;5;%dm     \x1b[0m' % (c.ansi)
         rgbs.append(c.rgb)
         hsvs.append(c.hsv)
 
