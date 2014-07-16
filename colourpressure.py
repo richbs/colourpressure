@@ -120,29 +120,30 @@ class ArtColour:
 if __name__ == "__main__":
     VERBOSE = False
     if sys.argv[1] == "-v":
-        image = sys.argv[2]
+        images = sys.argv[2:]
         VERBOSE = True
     else:
-        image = sys.argv[1]
-        
-    roy_im = roygbiv.Roygbiv(image)
-    p = roy_im.get_palette()
+        images = sys.argv[1:]
+
+    for image in images:
+        roy_im = roygbiv.Roygbiv(image)
+        p = roy_im.get_palette()
     
-    line = ""
-    rgbs = []
-    hsvs = []
-    for palette_colour in p.colors:
-        c = ArtColour(*palette_colour.value)
-        if VERBOSE:
-            print '\x1b[48;5;%dm     \x1b[0m' % (c.ansi)
-        rgbs.append(c.rgb)
-        hsvs.append(c.hsv)
+        line = ""
+        rgbs = []
+        hsvs = []
+        for palette_colour in p.colors:
+            c = ArtColour(*palette_colour.value)
+            if VERBOSE:
+                print '\x1b[48;5;%dm     \x1b[0m' % (c.ansi)
+            rgbs.append(c.rgb)
+            hsvs.append(c.hsv)
 
         
-    line = "" 
+        line = "" 
     
-    rgb_string = '|'.join(["(%s,%s,%s)" % (ab[0], ab[1], ab[2]) for ab in rgbs])
-    hsv_string = '|'.join(["(%s,%s,%s)" % (ab[0], ab[1], ab[2]) for ab in hsvs])
+        rgb_string = '|'.join(["(%s,%s,%s)" % (ab[0], ab[1], ab[2]) for ab in rgbs])
+        hsv_string = '|'.join(["(%s,%s,%s)" % (ab[0], ab[1], ab[2]) for ab in hsvs])
     
-    print '"%s","%s","%s"' % (image, rgb_string, hsv_string)
+        print '"%s","%s","%s"' % (image, rgb_string, hsv_string)
     

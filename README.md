@@ -16,4 +16,4 @@ Extract image palette from images and chuck onto STDOUT
 1. `pip install --upgrade -r requirements.txt`
 1. `python ./colourpressure.py image.jpeg`
 `# show approximate terminal colours`
-1. `python ./colourpressure.py -v image.jpeg`
+1. `python ./colourpressure.py -v 	image.jpeg`
