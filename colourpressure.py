@@ -55,6 +55,10 @@ class ArtColour:
             self._color = self._get_color()
         return self._color
 
+    def distance(self, r, g, b):
+        target = RGBColor(r, g, b)
+        return target.delta_e(RGBColor(*self.rgb), method="cmc")
+
     def _get_color(self):
 
         self.nearest = None
@@ -128,7 +132,9 @@ if __name__ == "__main__":
     for image in images:
         roy_im = roygbiv.Roygbiv(image)
         p = roy_im.get_palette()
-    
+        avec = ArtColour(*roy_im.get_average_rgb())
+        if VERBOSE:
+            print 'AVE: \x1b[48;5;%dm     \x1b[0m' % (avec.ansi)    
         line = ""
         rgbs = []
         hsvs = []
